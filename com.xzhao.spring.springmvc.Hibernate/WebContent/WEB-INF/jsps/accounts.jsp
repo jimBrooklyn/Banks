@@ -41,26 +41,32 @@
 
 	<sf:form method="post"
 		action="${pageContext.request.contextPath}/dotransaction">
-			
-		<table>		
+
+		<table>
 			<tr>
-				<td>From/To Account Id:</td>
-				<td><input name="actId" type="text" value="0" /></td>
+				<td>From/To AccountId</td>
+				<td><select name="actId">
+						<c:forEach var="account" items="${accounts}">
+							<option value="${account.actid}" selected>${account.actid}</option>
+						</c:forEach>
+				</select></td>
+			</tr>
+
+			<tr>
+				<td>Transaction Type</td>
+				<td><input type="radio" name="transtype" value="deposit"
+					checked />Deposit</td>
+				<td><input type="radio" name="transtype" value="withdraw" />Withdraw</td>
 			</tr>
 			<tr>
 				<td>Amount:</td>
 				<td><input name="amount" type="text" value="0.00"></td>
 			</tr>
 			<tr>
-				<td>Transaction Type</td>
-				<td><input type="radio" name="transtype" value="deposit" checked/>Deposit</td>
-				<td><input type="radio" name="transtype" value="withdraw"/>Withdraw</td>
-			</tr>		
-			<tr>				
 				<td><input type="submit" value="Submit" /></td>
 			</tr>
 		</table>
-</sf:form>
+	</sf:form>
 
 </body>
 
