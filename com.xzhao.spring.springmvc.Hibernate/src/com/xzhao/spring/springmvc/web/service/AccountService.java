@@ -8,14 +8,20 @@ import org.springframework.stereotype.Service;
 
 import com.xzhao.spring.springmvc.web.dao.Account;
 import com.xzhao.spring.springmvc.web.dao.AccountDao;
+import com.xzhao.spring.springmvc.web.dao.User;
 
 @Service("accountService")
 public class AccountService {
+	
 	private AccountDao accountDao;
 	
 	@Autowired
 	public void setAccountDao(AccountDao accountDao) {
 		this.accountDao = accountDao;
+	}
+	
+	public List<Account> getUserAccounts(String username){
+		return accountDao.getAccount(username);
 	}
 	
 	public List<Account> getCurrent(){
@@ -24,7 +30,7 @@ public class AccountService {
 
 	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	public void createAccount(Account account) {
-		accountDao.saveOrUpdate(account);	
+		accountDao.save(account);	
 	}
 
 	public boolean hasAccount(String name) {
@@ -41,9 +47,9 @@ public class AccountService {
 
 	public void saveOrUpdate(Account account) {
 		if(account.getActid()!=0){
-			accountDao.saveOrUpdate(account);
+			accountDao.update(account);
 		}else{
-			accountDao.saveOrUpdate(account);
+			accountDao.save(account);
 		}	
 	}
 
