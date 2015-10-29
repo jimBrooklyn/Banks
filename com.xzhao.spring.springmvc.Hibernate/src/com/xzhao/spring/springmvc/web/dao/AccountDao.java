@@ -24,7 +24,7 @@ public class AccountDao {
 		return sessionFactory.getCurrentSession();
 	}
 	
-	public void saveOrUpdate(Account account) {
+	public void save(Account account) {
 		session().save(account);
 	}
 
@@ -57,5 +57,19 @@ public class AccountDao {
 		crit.add(Restrictions.idEq(actid));
 		return (Account)crit.uniqueResult();
 	}
+
+	public void update(Account account) {
+
+		session().save(account);
+	}
+
+	public void updateAccount(int actid, double amount) {
+		// TODO Auto-generated method stub
+		Query query = session().createQuery("update Account set balance=balance+:amount where actid=:actid");
+		query.setLong("actid", actid);
+		query.setDouble("amount", amount);
+		int result= query.executeUpdate();
+	}
+
 
 }

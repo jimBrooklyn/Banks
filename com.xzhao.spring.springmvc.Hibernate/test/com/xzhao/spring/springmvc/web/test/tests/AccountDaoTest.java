@@ -48,7 +48,7 @@ public class AccountDaoTest {
 		
 		Account account= new Account(user, 0, "checking", 0.05, 1500.2);
 
-		accountDao.saveOrUpdate(account);
+		accountDao.save(account);
 		List<Account> accounts = accountDao.getAccount();
 		
 		assertEquals("Number of accounts should be 1.", 1, accounts.size());

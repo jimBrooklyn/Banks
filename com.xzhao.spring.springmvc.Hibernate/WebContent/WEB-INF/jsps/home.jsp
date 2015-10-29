@@ -10,58 +10,25 @@
 <link type="text/css" rel="stylesheet"
 	href="${pageContext.request.contextPath}/static/css/main.css" />
 
-<title>This is my homepage</title>
+<title>This is your homepage</title>
 </head>
 <body>
 
-	<p>Hello there:</p>
+	<div id="bankhead"> 
+	<p style="text-align:center; font-size:large; color:red"> Welcome to <span id="banklogo">Alphabet Bank Online</span></p>
+	</div>
 
-	<table class="formtable">
-		<tr>
-			<th>Name</th>
-			<th>AccountId</th>
-			<th>Account Type</th>
-			<th>Interest rate</th>
-			<th>Balance</th>
-		</tr>
-		<c:forEach var="account" items="${accounts}">
-			<tr>
-				<td><c:out value="${account.user.name}"></c:out></td>
-				<td><c:out value="${account.actid}"></c:out></td>
-
-				<td><c:out value="${account.acttype}"></c:out></td>
-
-				<td><c:out value="${account.inrate}"></c:out></td>
-
-				<td><c:out value="${account.balance}"></c:out></td>
-			</tr>
-
-		</c:forEach>
-	</table>
 
 	<c:choose>
-
 		<c:when test="${hasAccount}">
-
 			<p>
-				<a href="<c:url value="/createaccount"/>"> Edit your account</a>
+				<a href="<c:url value="/accounts"/>"> Manage your accounts</a>
 			</p>
-
-
 		</c:when>
-
-
-
-		<c:otherwise>
+	</c:choose>
 			<p>
 				<a href="<c:url value="/createaccount"/>"> Create a new account</a>
 			</p>
-
-		</c:otherwise>
-
-	</c:choose>
-
-
 	<sec:authorize access="!isAuthenticated()">
 
 		<p>
@@ -71,21 +38,21 @@
 	</sec:authorize>
 
 	<sec:authorize access="isAuthenticated()">
-
 		<c:url var="logoutUrl" value="/logout" />
 		<form action="${logoutUrl}" method="post">
 			<input type="submit" value="Log out" /> <input type="hidden"
 				name="${_csrf.parameterName}" value="${_csrf.token}" />
 		</form>
-
 	</sec:authorize>
 
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
-
 		<p>
-			<a href="<c:url value="/admin"/>">Admin</a>
+			<a href="<c:url value="/admin"/>">All users list</a>
 		</p>
-
+		
+		<p>
+			<a href="<c:url value="/allaccounts"/>">All bank accounts list</a>
+		</p>
 	</sec:authorize>
 </body>
 </html>

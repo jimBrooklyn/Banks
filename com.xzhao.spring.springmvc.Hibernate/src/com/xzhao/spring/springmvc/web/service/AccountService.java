@@ -45,16 +45,17 @@ public class AccountService {
 		accountDao.deleteAccount(actid);
 	}
 
-	public void saveOrUpdate(Account account) {
-		if(account.getActid()!=0){
-			accountDao.update(account);
-		}else{
+	public void save(Account account) {
 			accountDao.save(account);
-		}	
 	}
 
 	public List<Account> getAccount(String username) {
 		// TODO Auto-generated method stub
 		return accountDao.getAccount(username);
+	}
+
+	public void updateAccount(int actId, double amount) {
+		// TODO Auto-generated method stub
+		accountDao.updateAccount(actId, amount);
 	}
 }

@@ -21,8 +21,6 @@ $(document).ready(function(){
 </script>
 
 
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main.css" />
@@ -51,7 +49,7 @@ $(document).ready(function(){
 					<br />
 				<sf:errors path="inrate" cssClass="error" />
 			</tr>
-	<tr> <td><input type="submit" value="Edit this accout"></td>	</tr>
+	<tr> <td><input type="submit" value="Create a new account"></td>	</tr>
 
 
 <c:if test="${account.actid!= 0}">	

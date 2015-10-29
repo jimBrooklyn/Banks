@@ -27,8 +27,7 @@ public class HomeController {
 		boolean hasAccount = false;
 		if(principal !=null){
 			hasAccount = accountService.hasAccount(principal.getName());
-		}
-		
+		}		
 		model.addAttribute("hasAccount", hasAccount);
 		
 		return "home";

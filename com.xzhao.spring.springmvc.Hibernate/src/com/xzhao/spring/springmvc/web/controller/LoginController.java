@@ -1,5 +1,6 @@
 package com.xzhao.spring.springmvc.web.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,19 +11,19 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.xzhao.spring.springmvc.web.dao.Account;
 import com.xzhao.spring.springmvc.web.dao.FormValidationGroup;
 import com.xzhao.spring.springmvc.web.dao.User;
+import com.xzhao.spring.springmvc.web.service.AccountService;
 import com.xzhao.spring.springmvc.web.service.UserService;
 
 @Controller
 public class LoginController {
-
-	private UserService userService;
-
 	@Autowired
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
+	private UserService userService;
+	
+	@Autowired
+	private AccountService accountService;
 
 	@RequestMapping("/login")
 	public String showLogin() {
@@ -39,11 +40,34 @@ public class LoginController {
 		return "denied";
 	}
 	
+	@RequestMapping("/deposited")
+	public String showDeposited() {
+		return "deposited";
+	}
+	@RequestMapping("/withdrawn")
+	public String showWithDrawn() {
+		return "withdrawn";
+	}	
 	@RequestMapping("/admin")
 	public String showAdmin(Model model)	{
 		List<User> users = userService.getAllUsers();
 		model.addAttribute("users", users);
 		return "admin";
+	}
+	
+	@RequestMapping("/allaccounts")
+
+		public String showAllaccounts(Model model, Principal principal)	{				
+			List<Account> accounts = accountService.getCurrent();
+			model.addAttribute("accounts", accounts);
+			
+			boolean hasAccount = false;
+			if(principal !=null){
+				hasAccount = accountService.hasAccount(principal.getName());
+			}
+			
+			model.addAttribute("hasAccount", hasAccount);
+		return "allaccounts";
 	}
 
 	@RequestMapping("/newuser")
