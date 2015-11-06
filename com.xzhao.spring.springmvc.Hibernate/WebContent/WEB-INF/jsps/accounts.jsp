@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<h4>user's accounts list</h4>
+	<h4>${username} 's accounts list</h4>
 	<table class="formtable">
 		<tr>
 			<th>Name</th>

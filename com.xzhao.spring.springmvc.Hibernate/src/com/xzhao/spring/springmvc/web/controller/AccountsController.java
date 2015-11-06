@@ -31,6 +31,7 @@ public class AccountsController {
 		String username = principal.getName();
 		List<Account> accounts = accountService.getAccount(username);
 		model.addAttribute("accounts", accounts);
+		model.addAttribute("username", username);
 		return "accounts";
 	}
 
